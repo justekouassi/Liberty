@@ -13,9 +13,9 @@ public class DocumentServiceImpl implements DocumentService {
 
 	@Autowired
 	DocumentRepository documentRepository;
-	
+
 	public DocumentServiceImpl() {
-		
+
 	}
 
 	@Override

@@ -16,16 +16,20 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "document")
 public class Document {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+
 	@Column(nullable = false)
 	private String titre;
+
 	@Column(nullable = false)
 	private String description;
+
 	@CreatedDate
 	private Date dateCreation;
+
 	@ManyToOne
 	@JoinColumn(name = "idutilisateur")
 	private Utilisateur auteur;
@@ -33,7 +37,7 @@ public class Document {
 	public Document() {
 		super();
 	}
-	
+
 	public Document(String titre, String description, Date dateCreation) {
 		super();
 		this.titre = titre;
@@ -75,9 +79,8 @@ public class Document {
 
 	@Override
 	public String toString() {
-		return "Document [id=" + id + ", titre=" + titre + ", description=" + description + ", dateCreation="
+		return "Document [id = " + id + ", titre = " + titre + ", description = " + description + ", dateCreation = "
 				+ dateCreation + "]";
 	}
-	
-	
+
 }

@@ -1,4 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %><!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<!DOCTYPE html>
 <html lang="fr-FR">
 
 <head>
@@ -56,34 +57,6 @@
 				<a class="nav-link" href="/admin/documents">
 					<i class="fas fa-fw fa-user-edit"></i>
 					<span>Documents</span>
-				</a>
-			</li>
-			<!-- Nav Item - Tables -->
-			<li class="nav-item request()->is('admin/experts') ? 'active' : ''">
-				<a class="nav-link" href="/admin/experts">
-					<i class="fas fa-fw fa-user-graduate"></i>
-					<span>Experts</span>
-				</a>
-			</li>
-			<!-- Nav Item - Tables -->
-			<li class="nav-item request()->is('admin/courtiers') ? 'active' : ''">
-				<a class="nav-link" href="/admin/courtiers">
-					<i class="fas fa-fw fa-user-ninja"></i>
-					<span>Courtiers</span>
-				</a>
-			</li>
-			<!-- Nav Item - Tables -->
-			<li class="nav-item request()->is('admin/teleoperateurs') ? 'active' : ''">
-				<a class="nav-link" href="/admin/teleoperateurs">
-					<i class="fas fa-fw fa-user-nurse"></i>
-					<span>Service clients</span>
-				</a>
-			</li>
-			<!-- Nav Item - Tables -->
-			<li class="nav-item request()->is('admin/contentieux') ? 'active' : ''">
-				<a class="nav-link" href="/admin/contentieux">
-					<i class="fas fa-fw fa-user-injured"></i>
-					<span>Service contentieux</span>
 				</a>
 			</li>
 
@@ -195,7 +168,7 @@
 					<div class="d-sm-flex align-items-center justify-content-center mb-4">
 						<h1 class="h3 mb-0 text-gray-800">Ajout d'un document</h1>
 					</div>
-					<form class="form" method="POST" action="accueil.html/create">
+					<form class="form" method="POST" action="/documents/create">
 						<div class="input-container half ic2">
 							<input class="input" id="titre" name="titre" type="text" placeholder=" " />
 							<div class="cut"></div>

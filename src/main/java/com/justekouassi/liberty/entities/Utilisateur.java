@@ -13,14 +13,17 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "utilisateur")
 public class Utilisateur {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+
 	@Column(nullable = false)
 	private String pseudo;
+
 	@Column(nullable = false)
 	private String motdepasse;
+
 	@OneToMany(mappedBy = "auteur")
 	private List<Document> documents;
 
@@ -60,7 +63,7 @@ public class Utilisateur {
 
 	@Override
 	public String toString() {
-		return "Utilisateur [id=" + id + ", pseudo=" + pseudo + ", motdepasse=" + motdepasse + "]";
+		return "Utilisateur [id = " + id + ", pseudo = " + pseudo + ", motdepasse = " + motdepasse + "]";
 	}
-	
+
 }
