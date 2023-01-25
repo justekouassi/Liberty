@@ -2,6 +2,7 @@ package com.justekouassi.liberty.entities;
 
 import java.util.Date;
 
+import org.hibernate.annotations.DynamicUpdate;
 import org.springframework.data.annotation.CreatedDate;
 
 import jakarta.persistence.Column;
@@ -15,6 +16,7 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
+@DynamicUpdate
 @Table(name = "document")
 public class Document {
 

@@ -168,8 +168,8 @@
 						<div class="d-sm-flex align-items-center justify-content-center mb-4">
 							<h1 class="h3 mb-0 text-gray-800">Modification d'un rédacteur</h1>
 						</div>
-						<form class="form" method="POST" enctype="multipart/form-data" action="/documents/edit/{id}">
-							<% Document document=(Document) request.getAttribute("document"); %>
+						<% Document document=(Document) request.getAttribute("document"); %>
+						<form class="form" method="POST" enctype="multipart/form-data" action="/documents/edit/<%= document.getId() %>">
 								<div class="input-container half ic2">
 									<input class="input" id="titre" name="titre" type="text" value="<%= document.getTitre() %>"
 										placeholder=" " />

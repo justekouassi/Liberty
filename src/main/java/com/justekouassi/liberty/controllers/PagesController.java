@@ -1,16 +1,9 @@
 package com.justekouassi.liberty.controllers;
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.PrintWriter;
-import java.sql.Blob;
 import java.util.Date;
-import java.util.Enumeration;
 import java.util.List;
 
-import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,7 +11,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -68,22 +60,34 @@ public class PagesController {
 	}
 
 	@PostMapping("/documents/edit/{id}")
-	public String documentEdit(@RequestParam("file") MultipartFile file, HttpServletRequest request) throws IOException {
+	public String documentEdit(@PathVariable("id") long id, @RequestParam("file") MultipartFile file,
+			HttpServletRequest request) throws IOException {
 		String titre = request.getParameter("titre");
 		String description = request.getParameter("description");
 		Date date = new Date();
-		byte[] bytes = file.getBytes();
+		byte[] newBytes = file.getBytes();
 
-		Document document = new Document(titre, description, date, bytes);
+		Document document = documentService.readDocument(id);
+
+		byte[] oldBytes = document.getData();
+		document.setTitre(titre);
+		document.setDescription(description);
+		document.setDateCreation(date);
+		if (newBytes.length == 0) {
+			document.setData(oldBytes);
+		} else {
+			document.setData(newBytes);
+		}
+
 		documentService.updateDocument(document);
-		return "index"; // TODO
+		return "redirect:/";
 	}
 
 	@GetMapping("/documents/delete/{id}")
 	public ModelAndView documentDelete(@PathVariable("id") long id) {
 		documentService.deleteDocumentById(id);
-		ModelAndView mav = new ModelAndView("index");
-		return mav; // TODO
+		ModelAndView mav = new ModelAndView("redirect:/");
+		return mav;
 	}
 
 	@GetMapping("/documents/{id}")
@@ -92,7 +96,7 @@ public class PagesController {
 		byte[] dataBlob = document.getData();
 
 		response.setContentType("application/octet-stream");
-		response.setHeader("Content-Disposition", "attachment; filename=" + document.getTitre()+".png");
+		response.setHeader("Content-Disposition", "attachment; filename=" + document.getTitre() + ".png");
 		response.getOutputStream().write(dataBlob);
 	}
 
