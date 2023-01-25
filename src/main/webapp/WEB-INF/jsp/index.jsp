@@ -210,7 +210,7 @@ import="com.justekouassi.liberty.entities.Document, java.util.*" %>
 												<td><%= document.getDescription() %></td>
 												<td><%= document.getDateCreation() %></td>
 												<td>
-													<a class="btn btn-success btn-sm download" href="/documents/document/<%= document.getId() %>">
+													<a class="btn btn-success btn-sm download" href="/documents/<%= document.getId() %>">
 														<i class="fa fa-download"></i>
 													</a>
 													<a class="btn btn-primary btn-sm" href="/documents/edit/<%= document.getId() %>">

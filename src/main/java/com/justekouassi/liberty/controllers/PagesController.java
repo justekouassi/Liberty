@@ -1,11 +1,16 @@
 package com.justekouassi.liberty.controllers;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.PrintWriter;
+import java.sql.Blob;
 import java.util.Date;
 import java.util.Enumeration;
 import java.util.List;
 
+import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -79,6 +84,16 @@ public class PagesController {
 		documentService.deleteDocumentById(id);
 		ModelAndView mav = new ModelAndView("index");
 		return mav; // TODO
+	}
+
+	@GetMapping("/documents/{id}")
+	public void documentDownload(@PathVariable("id") long id, HttpServletResponse response) throws IOException {
+		Document document = documentService.readDocument(id);
+		byte[] dataBlob = document.getData();
+
+		response.setContentType("application/octet-stream");
+		response.setHeader("Content-Disposition", "attachment; filename=" + document.getTitre()+".png");
+		response.getOutputStream().write(dataBlob);
 	}
 
 	@GetMapping("/signup")
