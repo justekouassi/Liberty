@@ -10,6 +10,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.Lob;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
@@ -30,6 +31,9 @@ public class Document {
 	@CreatedDate
 	private Date dateCreation;
 
+	@Lob
+  private byte[] data;
+
 	@ManyToOne
 	@JoinColumn(name = "idutilisateur")
 	private Utilisateur auteur;
@@ -38,11 +42,18 @@ public class Document {
 		super();
 	}
 
-	public Document(String titre, String description, Date dateCreation) {
+	public Document(String titre, String description, Date dateCreation, byte[] data) {
 		super();
 		this.titre = titre;
 		this.description = description;
 		this.dateCreation = dateCreation;
+		this.data = data;
+	}
+
+	public Document(String titre, String description) {
+		super();
+		this.titre = titre;
+		this.description = description;
 	}
 
 	public Long getId() {
@@ -75,6 +86,14 @@ public class Document {
 
 	public void setDateCreation(Date dateCreation) {
 		this.dateCreation = dateCreation;
+	}
+
+	public byte[] getData() {
+		return data;
+	}
+
+	public void setData(byte[] data) {
+		this.data = data;
 	}
 
 	@Override
