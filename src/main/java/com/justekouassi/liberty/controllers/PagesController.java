@@ -19,6 +19,7 @@ import com.justekouassi.liberty.service.DocumentServiceImpl;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 @Controller
 public class PagesController {
@@ -110,14 +111,17 @@ public class PagesController {
 		return "login";
 	}
 
-	@GetMapping("/login")
-	public String loginGet(HttpServletRequest request) {
-		return "login";
-	}
-
 	@PostMapping("/login")
-	public String loginPost(HttpServletRequest request) {
-		return "index";
+	public String login(@RequestParam("pseudo") String pseudo, @RequestParam("motdepasse") String motdepasse, Model model, HttpSession session) {
+
+		// Authenticate the user
+		// ...
+
+		// On successful authentication, store the user details in the session
+		session.setAttribute("pseudo", pseudo);
+
+		// Redirect the user to the home page
+		return "redirect:/";
 	}
 
 	@GetMapping("/logout")

@@ -15,7 +15,7 @@ public class DocumentServiceImpl implements DocumentService {
 	DocumentRepository documentRepository;
 
 	public DocumentServiceImpl() {
-
+		super();
 	}
 
 	@Override

@@ -3,6 +3,7 @@ package com.justekouassi.liberty.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.justekouassi.liberty.entities.Utilisateur;
@@ -15,11 +16,13 @@ public class UtilisateurServiceImpl implements UtilisateurService {
 	UtilisateurRepository utilisateurRepository;
 
 	public UtilisateurServiceImpl() {
-
+		super();
 	}
 
 	@Override
 	public Utilisateur createUtilisateur(Utilisateur utilisateur) {
+		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+		String encodedPassword = passwordEncoder.encode(utilisateur.getMotdepasse());
 		return utilisateurRepository.save(utilisateur);
 	}
 
